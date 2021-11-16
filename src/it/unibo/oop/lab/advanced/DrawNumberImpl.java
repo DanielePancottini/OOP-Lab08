@@ -1,9 +1,10 @@
 package it.unibo.oop.lab.advanced;
 
+import java.util.Map;
 import java.util.Random;
 
 /**
- *
+ *Implementation of {@link DrawNumber} which reprensents the model class.
  */
 public final class DrawNumberImpl implements DrawNumber {
 
@@ -15,17 +16,18 @@ public final class DrawNumberImpl implements DrawNumber {
     private final Random random = new Random();
 
     /**
-     * @param min
-     *            minimum number
-     * @param max
-     *            maximum number
-     * @param attempts
-     *            the maximum number of attempts
+     * Builds a new {@link DrawNumberImpl}.
+     *
+     * @param propsMap properties of config file, default values if io errors
+     *
+     * @throws IOException
      */
-    public DrawNumberImpl(final int min, final int max, final int attempts) {
-        this.min = min;
-        this.max = max;
-        this.attempts = attempts;
+    public DrawNumberImpl(final Map<String, Integer> propsMap) {
+
+        this.max = propsMap.get("maximum");
+        this.min = propsMap.get("minimum");
+        this.attempts = propsMap.get("attempts");
+
         this.reset();
     }
 
