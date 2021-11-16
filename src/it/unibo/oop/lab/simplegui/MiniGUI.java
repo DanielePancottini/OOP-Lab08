@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package it.unibo.oop.lab.simplegui;
 
@@ -15,10 +15,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 
 /**
  * This class is a simple application that writes a random number on a file.
- * 
+ *
  * This application does not exploit the model-view-controller pattern, and as
  * such is just to be used to learn the basics, not as a template for your
  * applications.
@@ -32,14 +33,14 @@ public class MiniGUI {
     private final JFrame frame = new JFrame(TITLE);
 
     /**
-     * 
+     *
      */
     public MiniGUI() {
         final JPanel canvas = new JPanel();
         canvas.setLayout(new BorderLayout());
         final JButton write = new JButton("Print a random number on standard output");
         frame.setContentPane(canvas);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         /*
          * New Panel with horizontal Box Layout
          * */

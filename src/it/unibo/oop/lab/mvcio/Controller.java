@@ -1,31 +1,66 @@
 package it.unibo.oop.lab.mvcio;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
+
 /**
- * 
+ * This class implements a simple controller responsible of I/O access. It
+ * considers a single file at a time, and it is able to serialize objects in it.
  */
 public class Controller {
 
-    /*
-     * This class must implement a simple controller responsible of I/O access. It
-     * considers a single file at a time, and it is able to serialize objects in it.
-     * 
-     * Implement this class with:
-     * 
-     * 1) A method for setting a File as current file
-     * 
-     * 2) A method for getting the current File
-     * 
-     * 3) A method for getting the path (in form of String) of the current File
-     * 
-     * 4) A method that gets a String as input and saves its content on the current
-     * file. This method may throw an IOException.
-     * 
-     * 5) By default, the current file is "output.txt" inside the user home folder.
-     * A String representing the local user home folder can be accessed using
-     * System.getProperty("user.home"). The separator symbol (/ on *nix, \ on
-     * Windows) can be obtained as String through the method
-     * System.getProperty("file.separator"). The combined use of those methods leads
-     * to a software that runs correctly on every platform.
-     */
+    private File currentFile;
+    private static final String DEFAULT_PATH = System.getProperty("user.home") + File.separator + "output.txt";
+
+    /**
+     * Constructor that sets the current file to a default file with following path:
+     *      <user.home>/output.txt.
+     * */
+    public Controller() {
+        this.currentFile = new File(Controller.DEFAULT_PATH);
+    }
+
+    /**
+     * Writes input string to current file.
+     *
+     * @param toWrite string to be write into current file
+     * @throws FileNotFoundException
+     *
+     * */
+    public void writeToCurrentFile(final String toWrite) throws FileNotFoundException {
+        final PrintStream ps = new PrintStream(this.currentFile);
+        ps.print(toWrite);
+        ps.close();
+    }
+
+    /**
+     * Sets receiver's current file to input new current file.
+     *
+     * @param newCurrent {@link File} to be set as new current file
+     * */
+    public void setCurrentFile(final File newCurrent) {
+        if (newCurrent.exists()) {
+            this.currentFile = newCurrent;
+        }
+    }
+
+    /**
+     * Returns the receiver's current file.
+     *
+     * @return the current file as {@link File}
+     * */
+    public File getCurrentFile() {
+        return new File(this.currentFile.getPath());
+    }
+
+    /**
+     * Returns the current file's path.
+     *
+     * @return current file's path as {@link String}
+     * */
+    public String getCurrentFilePath() {
+        return this.currentFile.getPath();
+    }
 
 }

@@ -16,7 +16,7 @@ public final class EchoFile {
 
     /**
      * @param args arguments list, used to fetch files.
-     * @throws IOException 
+     * @throws IOException
      */
     public static void main(final String... args) throws IOException {
         if (args.length == 0) {

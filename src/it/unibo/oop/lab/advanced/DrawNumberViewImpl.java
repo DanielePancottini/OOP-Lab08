@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 
 /**
  * Graphical {@link DrawNumberView} implementation.
@@ -26,10 +27,10 @@ public final class DrawNumberViewImpl implements DrawNumberView {
     private final JFrame frame = new JFrame(FRAME_NAME);
 
     /**
-     * 
+     *
      */
     public DrawNumberViewImpl() {
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.getContentPane().add(new JPanel(new BorderLayout()));
         final JPanel pNorth = new JPanel(new FlowLayout());
         final JTextField tNumber = new JTextField(10);

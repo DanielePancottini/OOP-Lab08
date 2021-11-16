@@ -11,7 +11,7 @@ public final class DrawNumberApp implements DrawNumberViewObserver {
     private final DrawNumberView view;
 
     /**
-     * 
+     *
      */
     public DrawNumberApp() {
         this.model = new DrawNumberImpl(MIN, MAX, ATTEMPTS);

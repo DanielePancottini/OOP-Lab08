@@ -1,7 +1,7 @@
 package it.unibo.oop.lab.advanced;
 
 /**
- * 
+ *
  */
 public class AttemptsLimitReachedException extends Exception {
 

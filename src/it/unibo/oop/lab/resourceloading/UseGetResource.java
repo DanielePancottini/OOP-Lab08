@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 
 /**
  * Example class loading an image with {@link Class#getResource(String)}.
@@ -52,7 +53,7 @@ public final class UseGetResource {
         final JFrame f = new JFrame("Image loader");
         f.getContentPane().add(pan);
         f.setResizable(false);
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         f.pack();
         f.setLocationByPlatform(true);
         f.setVisible(true);
