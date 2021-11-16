@@ -5,10 +5,17 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Random;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -38,9 +45,23 @@ public class BadIOGUI {
         final JPanel canvas = new JPanel();
         canvas.setLayout(new BorderLayout());
         final JButton write = new JButton("Write on file");
-        canvas.add(write, BorderLayout.CENTER);
         frame.setContentPane(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        /*
+         * Create new box layout panel
+         * */
+        final JPanel boxLayoutPanel = new JPanel();
+        boxLayoutPanel.setLayout(new BoxLayout(boxLayoutPanel, BoxLayout.LINE_AXIS));
+        boxLayoutPanel.add(write);
+        /*
+         * Add box layout panel to border layout panel
+         * */
+        canvas.add(boxLayoutPanel, BorderLayout.CENTER);
+        /*
+         * Create new Read button
+         * */
+        final JButton readButton = new JButton("Read");
+        boxLayoutPanel.add(readButton);
         /*
          * Handlers
          */
@@ -58,6 +79,19 @@ public class BadIOGUI {
                     ps.print(rng.nextInt());
                 } catch (FileNotFoundException e1) {
                     JOptionPane.showMessageDialog(frame, e1, "Error", JOptionPane.ERROR_MESSAGE);
+                    e1.printStackTrace();
+                }
+            }
+        });
+        /*
+         * Handler for the read button
+         * */
+        readButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+               try {
+                    System.out.println(Files.readString(Path.of(PATH, "")));
+                } catch (IOException e1) {
                     e1.printStackTrace();
                 }
             }
@@ -86,6 +120,7 @@ public class BadIOGUI {
         /*
          * OK, ready to pull the frame onscreen
          */
+        frame.pack();
         frame.setVisible(true);
     }
 
