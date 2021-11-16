@@ -1,9 +1,17 @@
 package it.unibo.oop.lab.mvc;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 
 /**
  * A very simple program using a graphical interface.
@@ -12,6 +20,7 @@ import javax.swing.JFrame;
 public final class SimpleGUI {
 
     private final JFrame frame = new JFrame();
+    private final Controller controller = new ControllerImpl();
 
     /*
      * Once the Controller is done, implement this class in such a way that:
@@ -39,6 +48,49 @@ public final class SimpleGUI {
      */
     public SimpleGUI() {
 
+        final JPanel canvas = new JPanel(new BorderLayout());
+
+        final JTextField upperTxt = new JTextField();
+        canvas.add(upperTxt, BorderLayout.NORTH);
+
+        final JTextArea centerTxtArea = new JTextArea();
+        centerTxtArea.setEditable(false);
+        canvas.add(centerTxtArea, BorderLayout.CENTER);
+
+        final JPanel buttonsPanel = new JPanel(new BorderLayout());
+
+        final JButton printBtn = new JButton("Print");
+        buttonsPanel.add(printBtn, BorderLayout.WEST);
+
+        final JButton historyBtn = new JButton("Show History");
+        buttonsPanel.add(historyBtn, BorderLayout.EAST);
+
+        /*
+         * Buttons Handlers
+         * */
+
+        printBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                SimpleGUI.this.controller.setNextString(upperTxt.getText());
+                SimpleGUI.this.controller.printNext();
+            }
+        });
+
+        historyBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                for (final String x : SimpleGUI.this.controller.getPrintedHistory()) {
+                    centerTxtArea.append(x + " ");
+                }
+            }
+        });
+
+        canvas.add(buttonsPanel, BorderLayout.SOUTH);
+
+        this.frame.add(canvas);
+        this.frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
         /*
          * Make the frame half the resolution of the screen. This very method is
          * enough for a single screen setup. In case of multiple monitors, the
@@ -60,6 +112,17 @@ public final class SimpleGUI {
          * on screen. Results may vary, but it is generally the best choice.
          */
         frame.setLocationByPlatform(true);
+    }
+
+    /**
+     * Method that makes the main frame visible.
+     * */
+    public void display() {
+        this.frame.setVisible(true);
+    }
+
+    public static void main(final String[] args) {
+        new SimpleGUI().display();
     }
 
 }
