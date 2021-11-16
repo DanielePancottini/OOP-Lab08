@@ -29,9 +29,9 @@ public class Controller {
      *
      * */
     public void writeToCurrentFile(final String toWrite) throws FileNotFoundException {
-        final PrintStream ps = new PrintStream(this.currentFile);
-        ps.print(toWrite);
-        ps.close();
+        try (PrintStream ps = new PrintStream(this.currentFile)) {
+            ps.print(toWrite);
+        }
     }
 
     /**
